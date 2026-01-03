@@ -44,7 +44,16 @@ export default function Page() {
           <h2 className="text-xl font-bold">About</h2>
         </BlurFade>
         <BlurFade delay={BLUR_FADE_DELAY * 4}>
-          <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
+          <Markdown
+            className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert"
+            components={{
+              a: ({ href, children }) => (
+                <a href={href} target="_blank" rel="noopener noreferrer">
+                  {children}
+                </a>
+              ),
+            }}
+          >
             {DATA.summary}
           </Markdown>
         </BlurFade>
@@ -109,6 +118,68 @@ export default function Page() {
               </BlurFade>
             ))}
           </div>
+        </div>
+      </section>
+      <section id="publications">
+        <div className="flex min-h-0 flex-col gap-y-3">
+          <BlurFade delay={BLUR_FADE_DELAY * 10}>
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-bold">Publications</h2>
+              <Link
+                href={DATA.publications.googleScholar}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-blue-500 hover:underline"
+              >
+                Google Scholar →
+              </Link>
+            </div>
+          </BlurFade>
+          {DATA.publications.items.map((pub, id) => (
+            <BlurFade key={pub.title} delay={BLUR_FADE_DELAY * 11 + id * 0.05}>
+              <div className="flex flex-col gap-1 border rounded-lg p-4">
+                {pub.href ? (
+                  <Link
+                    href={pub.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium hover:underline"
+                  >
+                    {pub.title}
+                  </Link>
+                ) : (
+                  <span className="font-medium">{pub.title}</span>
+                )}
+                <p className="text-sm text-muted-foreground">{pub.authors}</p>
+                <p className="text-sm text-muted-foreground">
+                  {pub.publication}
+                  {pub.citation && ` · ${pub.citation}`}
+                </p>
+              </div>
+            </BlurFade>
+          ))}
+        </div>
+      </section>
+      <section id="awards">
+        <div className="flex min-h-0 flex-col gap-y-3">
+          <BlurFade delay={BLUR_FADE_DELAY * 12}>
+            <h2 className="text-xl font-bold">Awards</h2>
+          </BlurFade>
+          {DATA.awards.map((award, id) => (
+            <BlurFade key={award.title} delay={BLUR_FADE_DELAY * 13 + id * 0.05}>
+              <div className="flex flex-col gap-1 border rounded-lg p-4">
+                <Link
+                  href={award.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium hover:underline"
+                >
+                  {award.title}
+                </Link>
+                <p className="text-sm text-muted-foreground">{award.description}</p>
+              </div>
+            </BlurFade>
+          ))}
         </div>
       </section>
       <section id="projects">
@@ -208,10 +279,10 @@ export default function Page() {
               <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 Want to chat? Just shoot me a dm{" "}
                 <Link
-                  href={DATA.contact.social.X.url}
+                  href={DATA.contact.social.LinkedIn.url}
                   className="text-blue-500 hover:underline"
                 >
-                  with a direct question on twitter
+                  with a direct question on Linkedin
                 </Link>{" "}
                 and I&apos;ll respond whenever I can. I will ignore all
                 soliciting.

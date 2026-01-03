@@ -12,20 +12,47 @@ const fontSans = FontSans({
   variable: "--font-sans",
 });
 
+const seoDescription = "Dinesh Puppala is an award-winning Regulatory Affairs Leader at Google specializing in Digital Health, AI/ML medical devices, SaMD, and FDA regulatory strategy. Expert in 510(k), De Novo, and global regulatory frameworks.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
   title: {
-    default: DATA.name,
+    default: `${DATA.name} | Regulatory Affairs & Digital Health Expert`,
     template: `%s | ${DATA.name}`,
   },
-  description: DATA.description,
+  description: seoDescription,
+  keywords: [
+    "Dinesh Puppala",
+    "Regulatory Affairs",
+    "Digital Health",
+    "FDA",
+    "510(k)",
+    "De Novo",
+    "SaMD",
+    "AI in Healthcare",
+    "Medical Device Regulation",
+    "Google Health",
+    "RAPS",
+    "Regulatory Science",
+    "Johns Hopkins",
+  ],
+  authors: [{ name: "Dinesh Puppala", url: DATA.url }],
+  creator: "Dinesh Puppala",
   openGraph: {
-    title: `${DATA.name}`,
-    description: DATA.description,
+    title: `${DATA.name} | Regulatory Affairs & Digital Health Expert`,
+    description: seoDescription,
     url: DATA.url,
-    siteName: `${DATA.name}`,
+    siteName: DATA.name,
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/me.png",
+        width: 800,
+        height: 800,
+        alt: "Dinesh Puppala - Regulatory Affairs Expert",
+      },
+    ],
   },
   robots: {
     index: true,
@@ -39,13 +66,28 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: `${DATA.name}`,
+    title: `${DATA.name} | Regulatory Affairs & Digital Health Expert`,
     card: "summary_large_image",
+    description: seoDescription,
+    creator: "@dineshxr",
+    images: ["/me.png"],
+  },
+  alternates: {
+    canonical: DATA.url,
   },
   verification: {
     google: "",
     yandex: "",
   },
+  icons: {
+    icon: [
+      { url: "/favicon/favicon.ico", sizes: "any" },
+      { url: "/favicon/favicon-96x96.png", type: "image/png", sizes: "96x96" },
+      { url: "/favicon/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/favicon/apple-touch-icon.png",
+  },
+  manifest: "/favicon/site.webmanifest",
 };
 
 export default function RootLayout({
